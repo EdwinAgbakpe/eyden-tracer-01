@@ -25,6 +25,12 @@ public:
 		, m_up(up)
 	{
 		// --- PUT YOUR CODE HERE ---
+		float ang2 = angle * M_PI/ 180.0;
+		m_focus = 1.0/tan(ang2/2.0);
+		m_aspect = resolution.width/(float)resolution.height;
+		m_zAxis = normalize(dir);
+		m_xAxis = normalize(cross(m_zAxis, up));
+		m_yAxis = normalize(cross(m_xAxis, m_zAxis));
 	}
 	virtual ~CCameraPerspective(void) = default;
 
