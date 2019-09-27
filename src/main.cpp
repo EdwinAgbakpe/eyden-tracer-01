@@ -25,6 +25,7 @@ Mat RenderFrame(ICamera& camera)
 			// Initialize your ray here
 			
 			// Your code
+			camera.InitRay(x, y, ray);
 			
 			Vec3f col = RGB(0, 0, 0); // background color
 			
@@ -58,5 +59,14 @@ int main(int argc, char* argv[])
 	CCameraPerspective c3(Vec3f(-8, 3, 8), Vec3f(1, -0.1f, -1), Vec3f(1, 1, 0), 45, resolution);
 	Mat img3 = RenderFrame(c3);
 	imwrite("perspective3.jpg", img3);
+
+	CCameraPerspective ct(Vec3f(0, 0, 10), Vec3f(0, 0, -1), Vec3f(0, 1, 0), 60, resolution);
+	Ray rayt1, rayt2, rayt3, rayt4;
+	ct.InitRay(0,0,rayt1);
+	ct.InitRay(ct.getResolution().width,0,rayt2);
+	ct.InitRay(0,ct.getResolution().height,rayt3);
+	ct.InitRay(ct.getResolution().width,ct.getResolution().height,rayt4);
+	for(int i = 0; i < 3; i++)
+		std::cout<<rayt1.dir[i]<<" "<<rayt2.dir[i]<<" "<<rayt3.dir[i]<<" "<<rayt4.dir[i]<<std::endl;
 	return 0;
 }
